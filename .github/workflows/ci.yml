@@ -4,6 +4,9 @@ on:
   pull_request:
     branches:
       - main
+  push:
+    branches:
+      - main
 
 jobs:
   test:
@@ -22,10 +25,6 @@ jobs:
       - name: Install Playwright browsers
         run: npx playwright install --with-deps chromium
       - name: Build
-        env:
-          VITE_BASE: /${{ github.event.repository.name }}/
         run: npm run build
       - name: E2E smoke
-        env:
-          VITE_BASE: /${{ github.event.repository.name }}/
         run: npm run test:e2e

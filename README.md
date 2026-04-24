@@ -6,8 +6,18 @@ Browser-based 3D tactical open-world shooter prototype, built with Three.js + Ty
 
 ## Play
 
-Once GitHub Pages is enabled (Settings → Pages → Source: GitHub Actions),
-each push to the deploy branch publishes to: `https://<user>.github.io/<repo>/`.
+Hosted on Vercel. Each push to a tracked branch auto-deploys; PRs get
+preview URLs.
+
+**One-time setup (Vercel UI, ~30 seconds):**
+
+1. Go to <https://vercel.com/new> and sign in with GitHub.
+2. Import this repo (`anandin/openworld`).
+3. Vercel auto-detects Vite (`framework: vite`, output `dist/`). Click
+   **Deploy**. No env vars needed.
+
+After that the production URL is `https://<project>.vercel.app/`. Push to
+the deploy branch → live in ~30s.
 
 ## Local
 
