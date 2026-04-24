@@ -1,0 +1,37 @@
+{
+  "name": "openworld",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "description": "Browser-based 3D tactical open-world shooter prototype",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc --noEmit && vite build",
+    "preview": "vite preview --host --port 4173",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint . --max-warnings=0",
+    "format": "prettier -w .",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:e2e": "playwright test",
+    "test:e2e:install": "playwright install --with-deps chromium"
+  },
+  "dependencies": {
+    "three": "0.162.0",
+    "simplex-noise": "4.0.3"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.44.1",
+    "@types/three": "0.162.0",
+    "@typescript-eslint/eslint-plugin": "7.10.0",
+    "@typescript-eslint/parser": "7.10.0",
+    "eslint": "8.57.0",
+    "prettier": "3.2.5",
+    "typescript": "5.4.5",
+    "vite": "5.2.11",
+    "vitest": "1.6.0"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
