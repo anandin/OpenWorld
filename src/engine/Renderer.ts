@@ -8,6 +8,7 @@ export class Renderer {
       canvas,
       antialias: true,
       powerPreference: 'high-performance',
+      failIfMajorPerformanceCaveat: false,
     });
     this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     this.renderer.outputColorSpace = THREE.SRGBColorSpace;

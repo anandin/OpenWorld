@@ -1,7 +1,9 @@
 import * as THREE from 'three';
 import { Engine } from '@engine/Engine';
+import { probeWebGL } from '@engine/webgl';
 import { HeightField, DEFAULT_HEIGHTFIELD } from '@world/HeightField';
 import { buildTerrainMesh } from '@world/Terrain';
+import { renderWebGLError } from '@ui/webglError';
 import { log } from '@core/logger';
 
 declare global {
@@ -42,6 +44,14 @@ function main(): void {
   const app = document.getElementById('app');
   if (!app) throw new Error('missing #app host');
 
+  bootMessage('checking WebGL…');
+  const probe = probeWebGL();
+  if (!probe.ok) {
+    log.warn('webgl unavailable:', probe);
+    renderWebGLError(probe);
+    return;
+  }
+
   bootMessage('initializing renderer…');
   const engine = new Engine(app);
 
@@ -71,5 +81,13 @@ try {
   main();
 } catch (err) {
   log.error('fatal:', err);
-  bootMessage(`fatal: ${err instanceof Error ? err.message : String(err)}`);
+  const msg = err instanceof Error ? err.message : String(err);
+  // Three.js's WebGLRenderer throws this exact string when context creation
+  // fails despite our pre-probe (rare race / driver edge case). Treat the
+  // same as a probe failure so the user gets the helpful diagnostic.
+  if (/WebGL/i.test(msg)) {
+    renderWebGLError({ reason: msg });
+  } else {
+    bootMessage(`fatal: ${msg}`);
+  }
 }
